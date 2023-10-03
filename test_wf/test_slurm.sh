@@ -9,5 +9,3 @@
 
 # output some useful information and save it to a file in the current directory
 touch > a.txt
-
-dd
