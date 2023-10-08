@@ -8,7 +8,7 @@
             "partition": "ifarm",
             
             "command": [
-                "/home/tsai/vk-cmd-swif/test_wf/run/cmd.sh"
+                "echo 'hello world!' > hello.txt"
             ],
             "constraint": "centos79",
             "cpu_cores": 1,

@@ -3,5 +3,6 @@
 source ../cmds_swif.sh
 
 genwf test.json
-runwf test-swif
-statwf test-swif 5
+runwf job-nersc
+
+statwf job-nersc 1

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../cmds_swif.sh
+source ../../cmds_swif.sh
 
 genwf test.json
 runwf test-swif

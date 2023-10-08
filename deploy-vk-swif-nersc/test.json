@@ -1,0 +1,25 @@
+
+{ 
+    "name": "job-nersc",
+    "jobs": [
+        {
+            "name": "job1",
+            "account": "m3792",
+            "partition": "debug",
+            "constraint": "cpu",
+            "command": [
+                "echo 'hello world' > /global/homes/j/jlabtsai/swif/hello.txt"
+            ],
+            "cpu_cores": 1,
+            "stderr": "/global/homes/j/jlabtsai/swif/slurm-%j.out",
+            "stdout": "/global/homes/j/jlabtsai/swif/slurm-%j.err",
+            "time_secs": 300
+        }
+    ],
+    "site_name": "nersc/perl1",
+    "site_path": "perl1",
+    "site_login_user": "jlabtsai",
+    "site_login_host": "login39",
+    "site_storage": "nersc:m3792"
+
+}
