@@ -1,16 +1,26 @@
-# Introduction
-How to run vk-cmd in remote compute sites with workflow tool SWIF2. To check the flags of SWIF2, please refer to [SWIF2](https://scicomp.jlab.org/cli/swif.html)
+# Running vk-cmd with SWIF2 at remote compute sites
 
+## Introduction
+This guide explains how to run vk-cmd in remote compute sites using the workflow tool SWIF2. To check the flags of SWIF2, please refer to the [SWIF2 documentation](https://scicomp.jlab.org/cli/swif.html).
 
-# Setup SWIF2 for the remote compute site, Perlmutter at NERSC
-1. Set up the globus endpoint (optional)
-    - [Set up globus endpoint for Perlmutter at NERSC](https://davidljlab.wordpress.com/2018/07/18/swif2-testing/)
+## Setting up SWIF2 for running workflows at NERSC
+1. Set up the Globus endpoint (optional)
+    - [Set up Globus endpoint for Perlmutter at NERSC](https://davidljlab.wordpress.com/2018/07/18/swif2-testing/)
     - [Hall-D](https://halldweb.jlab.org/wiki/index.php/HOWTO_Execute_a_Launch_using_NERSC)
 
-2. No password login to perlmutter is required. Please refer to use the scrips in `deploy-vk-swif-nersc/misc/no-password-nersc` to set up the no password login.
+2. No password login to Perlmutter is required. Use the scripts in `deploy-vk-swif-nersc/misc/no-password-nersc` to set up the no password login.
 
-3. To run workflows at NERSC, please refer to the scripts in `deploy-vk-swif-nersc/nersc-workflow` and `deploy-vk-swif-nersc/wf_config.yaml` for the workflow configuration.
-    - When running the workflow for the first time, site information will be created according to the `wf_config.yaml` file. Please make sure that the site information is correct. To check the site information, please use `swif show-sites`.
-    - Once the site information is created, any sites with the same name will not be created again. Please check [swif-create-site](https://scicomp.jlab.org/cli/create.html) for more information.
+3. To run workflows at NERSC, refer to the scripts in `deploy-vk-swif-nersc/nersc-workflow` and `deploy-vk-swif-nersc/wf_config.yaml` for the workflow configuration.
+    - When running the workflow for the first time, site information will be created according to the `wf_config.yaml` file. Make sure that the site information is correct. To check the site information, use `swif show-sites`.
+    - Once the site information is created, any sites with the same name will not be created again. Check [swif-create-site](https://scicomp.jlab.org/cli/create.html) for more information.
 
 4. Commands for the job must be a file located at the remote site. Specify the path to the file in the `job:cmd_file` field of `wf_config.yaml`.
+
+## Running vk-cmd with SWIF2 at NERSC
+1. Make sure the workflows can be submitted via SWIF2. Refer to the previous section for the setup.
+
+2. To run vk-cmd at NERSC, establish the connection between the compute nodes at NERSC and the Kubernetes API server at JLab.
+
+3. Run `tunnel-jiriaf-to-nersc-via-ifarm.sh` at ifarm to establish the connection from the API server to the login at Perlmutter. The script will create two tunnels, one from the API server to ifarm, and the other from ifarm to the login at Perlmutter.
+
+4. To connect compute nodes at Perlmutter to the API server at JLab, create a tunnel from the compute nodes to the login at Perlmutter, e.g. `ssh -NfL <PORT-control-plane>:localhost:<PORT-control-plane> login01`. Include this command in the job script located at the `job:cmd_file` field of `wf_config.yaml`.
