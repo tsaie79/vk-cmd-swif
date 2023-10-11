@@ -1,15 +1,12 @@
 import subprocess
-import math
-import glob
-import sys
-import os
+
+WORKFLOW = "test-vk-swif-nersc"
 
 
 PROJECT = "m3792"
-timelimit = "00:01:00"
+timelimit = "00:30:00"
 qos = "debug"
 NODETYPE = "cpu"
-WORKFLOW = "test-nersc"
 JOB_STR = "job1"
 
 
@@ -28,23 +25,19 @@ SBATCH += ['-o', 'job-%j.out']
 SBATCH += ['-e', 'job-%j.err']
 
 nersc_project_dir = "/global/homes/j/jlabtsai/swif"
+nersc_home = "/global/homes/j/jlabtsai/"
 
-
-
-def create_wf(new_site=False):
+def create_wf():
     # Create workflow
     cmd =  ['swif2', 'create', '-workflow', WORKFLOW]
     
     # check site info: swif2 show-sites
-    if new_site:
-        cmd += ['-site-name', "perlmutter",
-                "-site-path", "/global/homes/j/jlabtsai/swif", 
-                "-site-globus-endpoint", "63e2f6ac-a46f-4853-b518-e6e33859e860",
-                "-site-login-user", "jlabtsai",
-                "-site-login-host", "perlmutter",
-                ]
-    else:
-        cmd += ['-site', 'perlmutter']
+    cmd += ['-site-name', "perlmutter",
+            "-site-path", f"{nersc_project_dir}", 
+            "-site-globus-endpoint", "63e2f6ac-a46f-4853-b518-e6e33859e860",
+            "-site-login-user", "jlabtsai",
+            "-site-login-host", "perlmutter",
+            ]
 
     print(f'create_wf cmd = {cmd}')
     subprocess.call(cmd)
@@ -52,7 +45,7 @@ def create_wf(new_site=False):
 
 def add_job():
 # Command for job to run
-    CMD = [f"{nersc_project_dir}/cmd.sh"]
+    CMD = [f"{nersc_home}/vk-cmd.sh"]
     # CMD = [f'echo "Hello World" > {nersc_project_dir}/hello.txt']
 
 
@@ -69,7 +62,6 @@ def add_job():
     subprocess.call(SWIF2_CMD)
 
 
-
 def run_wf():
     # Run workflow
     cmd =  ['swif2', 'run', '-workflow', WORKFLOW]
@@ -78,7 +70,6 @@ def run_wf():
 
 
 if __name__ == "__main__":
-
     create_wf()
     add_job()
     run_wf()

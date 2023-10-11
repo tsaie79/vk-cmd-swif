@@ -16,4 +16,4 @@ function genwf { swif2 import -file $1; }
 function runwf { swif2 run $1; }
 
 #slurm job details
-scontrol show jobid -dd $SLURM_JOB_ID
+# scontrol show jobid -dd $SLURM_JOB_ID
