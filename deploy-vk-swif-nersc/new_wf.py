@@ -18,11 +18,6 @@ wf_config = wf_config["jobs"][0]
 
 
 WORKFLOW = "test-vk-swif-nersc"
-# PROJECT = "m3792"
-# timelimit = "00:30:00"
-# qos = "debug"
-# NODETYPE = "cpu"
-# JOB_STR = "job1"
 
 
 # SLURM options

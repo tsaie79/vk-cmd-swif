@@ -6,9 +6,9 @@ This guide explains how to run vk-cmd in remote compute sites using the workflow
 ## Setting up SWIF2 for running workflows at NERSC
 1. Set up the Globus endpoint (optional)
     - [Set up Globus endpoint for Perlmutter at NERSC](https://davidljlab.wordpress.com/2018/07/18/swif2-testing/)
-    - [Hall-D](https://halldweb.jlab.org/wiki/index.php/HOWTO_Execute_a_Launch_using_NERSC)
+    - [GlueX](https://halldweb.jlab.org/wiki/index.php/HOWTO_Execute_a_Launch_using_NERSC)
 
-2. No password login to Perlmutter is required. Use the scripts in `deploy-vk-swif-nersc/misc/no-password-nersc` to set up the no password login.
+2. No password login to Perlmutter is required. Please refer to the [Collaboration Accounts](https://docs.nersc.gov/accounts/collaboration_accounts/) page for more information. Notice that `group-name` in the command `./sshproxy.sh -c group-name` has to be set to a valid group name to have long days of no password login. Please refer to the [GlueX](https://halldweb.jlab.org/wiki/index.php/HOWTO_Execute_a_Launch_using_NERSC) for more information.
 
 3. To run workflows at NERSC, refer to the scripts in `deploy-vk-swif-nersc/new_wf.py` and `deploy-vk-swif-nersc/wf_config.yaml` for the workflow configuration.
     - When running the workflow for the first time, site information will be created according to the `wf_config.yaml` file. Make sure that the site information is correct. To check the site information, use `swif show-sites`.
