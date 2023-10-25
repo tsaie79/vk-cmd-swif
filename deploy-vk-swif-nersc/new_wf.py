@@ -16,10 +16,6 @@ wf_name = wf_config["wf_name"]
 # since we have only one job in the workflow
 wf_config = wf_config["jobs"][0]
 
-
-WORKFLOW = "test-vk-swif-nersc"
-
-
 # SLURM options
 SBATCH  = ['-sbatch']
 SBATCH += [f'--account={wf_config["slurm"]["project"]}']
@@ -33,7 +29,6 @@ SBATCH += ['-q', wf_config["slurm"]["queue"]]
 SBATCH += ['-C', wf_config["slurm"]["constraint"]]
 SBATCH += ['-o', 'job-%j.out']
 SBATCH += ['-e', 'job-%j.err']
-
 
 
 def create_wf():
@@ -56,14 +51,22 @@ def create_wf():
 def add_job():
 # Command for job to run
     CMD = [wf_config["job"]["cmd_file"]]
-    # CMD = [f'echo "Hello World" > {nersc_project_dir}/hello.txt']
+    # CMD = [f'echo "Hello World" > {wf_config["site"]["home_dir"]}/hello.txt']
 
+    # VK_CMD = '{ ssh -NfL 42053:localhost:42053 login01;'
+    # VK_CMD += f' export NODENAME="{wf_config["job"]["vk_node_name"]}";'
+    # VK_CMD += ' shifter --image=docker:jlabtsai/vk-cmd:latest --entrypoint; } & '
+
+    # UNIX_PIPE_CMD = '{ sh /global/homes/j/jlabtsai/docker_img/build-pipe.sh; } &'
+    # CMD = [VK_CMD + UNIX_PIPE_CMD]
 
     # Make swif2 command
     SWIF2_CMD  = ['swif2']
     SWIF2_CMD += ['add-job']
     SWIF2_CMD += ['-workflow', wf_name]
-    SWIF2_CMD += ['-name', wf_config["job"]["name"]]
+    SWIF2_CMD += ['-name', wf_config["job"]["vk_node_name"]]
+    # SWIF2_CMD += ['-shell', '/bin/bash']
+
     
     
     # Add SBATCH options and actual command to run to swif2 command		
