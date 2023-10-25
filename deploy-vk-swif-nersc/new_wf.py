@@ -50,22 +50,22 @@ def create_wf():
 
 def add_job():
 # Command for job to run
-    CMD = [wf_config["job"]["cmd_file"]]
+    # CMD = [wf_config["job"]["cmd_file"]]
     # CMD = [f'echo "Hello World" > {wf_config["site"]["home_dir"]}/hello.txt']
 
-    # VK_CMD = '{ ssh -NfL 42053:localhost:42053 login01;'
-    # VK_CMD += f' export NODENAME="{wf_config["job"]["vk_node_name"]}";'
-    # VK_CMD += ' shifter --image=docker:jlabtsai/vk-cmd:latest --entrypoint; } & '
+    VK_CMD = '{ ssh -NfL 42053:localhost:42053 login01;'
+    VK_CMD += f' export NODENAME="{wf_config["job"]["vk_node_name"]}";'
+    VK_CMD += ' shifter --image=docker:jlabtsai/vk-cmd:latest --entrypoint; } & '
 
-    # UNIX_PIPE_CMD = '{ sh /global/homes/j/jlabtsai/docker_img/build-pipe.sh; } &'
-    # CMD = [VK_CMD + UNIX_PIPE_CMD]
+    UNIX_PIPE_CMD = '{ sh /global/homes/j/jlabtsai/docker_img/build-pipe.sh; } &'
+    CMD = [VK_CMD + UNIX_PIPE_CMD]
 
     # Make swif2 command
     SWIF2_CMD  = ['swif2']
     SWIF2_CMD += ['add-job']
     SWIF2_CMD += ['-workflow', wf_name]
     SWIF2_CMD += ['-name', wf_config["job"]["vk_node_name"]]
-    # SWIF2_CMD += ['-shell', '/bin/bash']
+    SWIF2_CMD += ['-shell', '/bin/bash']
 
     
     
