@@ -65,7 +65,7 @@ def add_job():
     SWIF2_CMD += ['add-job']
     SWIF2_CMD += ['-workflow', wf_name]
     SWIF2_CMD += ['-name', wf_config["job"]["vk_node_name"]]
-    SWIF2_CMD += ['-shell', '/bin/bash']
+    SWIF2_CMD += ['-shell', '/bin/bash'] # this is required for the hard-coded command
 
     
     
