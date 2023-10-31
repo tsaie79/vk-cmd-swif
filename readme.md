@@ -24,3 +24,5 @@ This guide explains how to run vk-cmd in remote compute sites using the workflow
 3. Run `tunnel-jiriaf-to-nersc-via-ifarm.sh` at ifarm to establish the connection from the API server to the login at Perlmutter. The script will create two tunnels, one from the API server to ifarm, and the other from ifarm to the login at Perlmutter.
 
 4. To connect compute nodes at Perlmutter to the API server at JLab, create a tunnel from the compute nodes to the login at Perlmutter, e.g. `ssh -NfL <PORT-control-plane>:localhost:<PORT-control-plane> login01`. Include this command in the job script located at the `job:cmd_file` field of `wf_config.yaml`.
+
+TEST
