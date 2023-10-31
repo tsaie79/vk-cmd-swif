@@ -1,7 +1,7 @@
 # Running vk-cmd with SWIF2 at remote compute sites
 
 ## Introduction
-This guide explains how to run vk-cmd in remote compute sites using the workflow tool SWIF2. To check the flags of SWIF2, please refer to the [SWIF2 documentation](https://scicomp.jlab.org/cli/swif.html).
+This guide explains how to run `vk-cmd` in remote compute sites using the workflow tool SWIF2. To check the flags of SWIF2, please refer to the [SWIF2 documentation](https://scicomp.jlab.org/cli/swif.html).
 
 ## Setting up SWIF2 for running workflows at NERSC
 1. Set up the Globus endpoint (optional)
@@ -19,7 +19,7 @@ This guide explains how to run vk-cmd in remote compute sites using the workflow
 ## Running vk-cmd with SWIF2 at NERSC
 1. Make sure the workflows can be submitted via SWIF2. Refer to the previous section for the setup.
 
-2. To run vk-cmd at NERSC, establish the connection between the compute nodes at NERSC and the Kubernetes API server at JLab.
+2. To run `vk-cmd` at NERSC, establish the connection between the compute nodes at NERSC and the Kubernetes API server at JLab.
 
 3. Run `tunnel-jiriaf-to-nersc-via-ifarm.sh` at `ifarm` to establish the connection from the API server to the login at `Perlmutter`. The script will create two tunnels, one from the API server to `ifarm`, and the other from `ifarm` to the login at `Perlmutter`.
 
