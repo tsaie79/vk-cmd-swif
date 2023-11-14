@@ -21,6 +21,19 @@ This guide explains how to run `vk-cmd` in remote compute sites using the workfl
 
 2. To run `vk-cmd` at NERSC, establish the connection between the compute nodes at NERSC and the Kubernetes API server at JLab.
 
-3. Run `make_ssh_tunnels.sh` at `ifarm` to establish the connection from the API server to the login at `Perlmutter`. The script will create two tunnels, one from the API server to `ifarm`, and the other from `ifarm` to the login at `Perlmutter`.
+3. Run `make_ssh_tunnels.sh` at `ifarm` to establish the connection from the API server to the login at `Perlmutter`. The script will create two tunnels, one from the API server to `ifarm`, and the other from `ifarm` to the login at `Perlmutter`. 
+    ```bash
+    # s: jiriaf2301, c: ifarm
+    ssh -NfL 12347:localhost:35393 jiriaf2302
 
-4. To connect compute nodes at `Perlmutter` to the API server at JLab, create a tunnel from the compute nodes to the login at `Perlmutter`, e.g. `ssh -NfL <PORT-control-plane>:localhost:<PORT-control-plane> login01`. Include this command in the job script located at the `job:cmd_file` field of `wf_config.yaml`.
+    # s: ifarm, c: perlmutter
+    ssh -NfR 35393:localhost:12347 perlmutter 
+    ## Record the return login ID (e.g. x3113c0s11b0n0) for the next step.
+    ```
+    **Notice**: When executing the second command, one has to record the `login ID` (e.g. x3113c0s11b0n0) of the login node at NERSC. This is for the next step, which is to create a tunnel from the compute node to the login node.
+
+
+4. To connect compute nodes at `Perlmutter` to the API server at JLab, create a tunnel from the compute nodes to the login at `Perlmutter`. Include this command in the job script located at the `job:cmd_file` field of `wf_config.yaml`. 
+    ```bash
+    ssh -NfL <PORT-control-plane>:localhost:<PORT-control-plane> login ID
+    ```
