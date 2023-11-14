@@ -35,5 +35,6 @@ This guide explains how to run `vk-cmd` in remote compute sites using the workfl
 
 4. To connect compute nodes at `Perlmutter` to the API server at JLab, create a tunnel from the compute nodes to the login at `Perlmutter`. Include this command in the job script located at the `job:cmd_file` field of `wf_config.yaml`. 
     ```bash
-    ssh -NfL <PORT-control-plane>:localhost:<PORT-control-plane> login ID
+    ssh -i $HOME/.ssh/nersc -NfL <PORT-control-plane>:localhost:<PORT-control-plane> login ID
     ```
+    **Notice**: Make sure that one creates `$HOME/.ssh/nersc` and places it at login at `Perlmutter`.
